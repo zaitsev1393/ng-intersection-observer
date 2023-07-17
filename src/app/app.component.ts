@@ -1,13 +1,24 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgObserverDirective } from './ng-observer/ng-observer.directive';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  imports: [CommonModule, NgObserverDirective],
+  template: `
+    <div class="container">
+      <div
+        ng-observer
+        (onEnterViewport)="enteredViewport($event)"
+        class="element"
+      ></div>
+    </div>
+  `,
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'ng-observer';
+  enteredViewport(value: boolean): void {
+    console.log('entered viewport: ', value);
+  }
 }
