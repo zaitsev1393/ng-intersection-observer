@@ -5,28 +5,24 @@ import {
   Output,
   inject,
 } from '@angular/core';
-import { timer } from 'rxjs';
 
 @Directive({
   selector: '[ng-observer]',
   standalone: true,
 })
 export class NgObserverDirective {
-  @Output() onEnterViewport: EventEmitter<boolean> = new EventEmitter();
+  @Output() enteredViewport: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {
     let initialized = false;
 
-    const callback = (
-      entries: IntersectionObserverEntry[],
-      observer: IntersectionObserver
-    ) => {
+    const callback = (entries: IntersectionObserverEntry[]) => {
       if (!initialized) {
         initialized = true;
         return;
       }
       entries.forEach((entry: IntersectionObserverEntry) =>
-        this.onEnterViewport.emit(entry.isIntersecting)
+        this.enteredViewport.emit(entry.isIntersecting)
       );
     };
 

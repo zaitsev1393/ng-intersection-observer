@@ -10,7 +10,7 @@ import { NgObserverDirective } from './ng-observer/ng-observer.directive';
     <div class="container">
       <div
         ng-observer
-        (onEnterViewport)="enteredViewport($event)"
+        (enteredViewport)="enteredViewport($event)"
         class="element"
       ></div>
     </div>
